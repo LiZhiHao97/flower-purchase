@@ -1,4 +1,4 @@
-package com.example.flowerpurchase.Model;
+package com.example.flowerpurchase.model;
 
 import javax.persistence.*;
 
@@ -19,16 +19,18 @@ public class Product {
     @Column(nullable = false)
     private int status;
     @Column(nullable = false)
-    private String craete_time;
+    private String create_time;
 
-    public Product(String name, String description, String img, int price, int status, String craete_time) {
+    public Product(String name, String description, String img, int price, int status, String create_time) {
         this.name = name;
         this.description = description;
         this.img = img;
         this.price = price;
         this.status = status;
-        this.craete_time = craete_time;
+        this.create_time = create_time;
     }
+
+    public Product() {}
 
     public long getId() {
         return id;
@@ -79,11 +81,11 @@ public class Product {
     }
 
     public String getCraete_time() {
-        return craete_time;
+        return create_time;
     }
 
-    public void setCraete_time(String craete_time) {
-        this.craete_time = craete_time;
+    public void setCraete_time(String create_time) {
+        this.create_time = create_time;
     }
 
 }

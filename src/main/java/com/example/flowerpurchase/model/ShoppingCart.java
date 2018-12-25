@@ -1,4 +1,4 @@
-package com.example.flowerpurchase.Model;
+package com.example.flowerpurchase.model;
 
 import javax.persistence.*;
 
@@ -17,15 +17,17 @@ public class ShoppingCart {
     @Column(nullable = false)
     private int checked;
     @Column(nullable = false)
-    private int create_time;
+    private String create_time;
 
-    public ShoppingCart(long uid, long pid, int quantity, int checked, int create_time) {
+    public ShoppingCart(long uid, long pid, int quantity, int checked, String create_time) {
         this.uid = uid;
         this.pid = pid;
         this.quantity = quantity;
         this.checked = checked;
         this.create_time = create_time;
     }
+
+    public ShoppingCart() {}
 
     public long getId() {
         return id;
@@ -67,11 +69,11 @@ public class ShoppingCart {
         this.checked = checked;
     }
 
-    public int getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(int create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 }

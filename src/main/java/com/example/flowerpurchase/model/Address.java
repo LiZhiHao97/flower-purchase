@@ -1,4 +1,4 @@
-package com.example.flowerpurchase.Model;
+package com.example.flowerpurchase.model;
 
 import javax.persistence.*;
 
@@ -35,6 +35,8 @@ public class Address {
         this.receiver_address = receiver_address;
         this.receiver_zip = receiver_zip;
     }
+
+    public Address() {}
 
     public long getId() {
         return id;

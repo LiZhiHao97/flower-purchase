@@ -1,4 +1,4 @@
-package com.example.flowerpurchase.Model;
+package com.example.flowerpurchase.model;
 
 import javax.persistence.*;
 
@@ -16,12 +16,19 @@ public class User {
     private String sex;
     @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
+    private int avatar;
 
-    public User(String username, String password, String sex, String email) {
+    public User(String username, String password, String sex, String email, int avatar) {
         this.username = username;
         this.password = password;
         this.sex = sex;
         this.email = email;
+        this.avatar = avatar;
+    }
+
+    public User() {
+
     }
 
     public long getId() {
@@ -62,5 +69,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 }
