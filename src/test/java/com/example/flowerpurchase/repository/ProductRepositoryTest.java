@@ -35,4 +35,10 @@ public class ProductRepositoryTest {
             System.out.println(item.getName());
         }
     }
+
+    @Test
+    public void testFindById() {
+        Product product = productRepository.findById(8l).get();
+        System.out.println(product.getName());
+    }
 }

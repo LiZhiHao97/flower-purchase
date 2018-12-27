@@ -20,7 +20,7 @@ public class UserRepositoryTest {
     @Test
     public void testSave() {
 
-        userRepository.save(new User("lizhihao2", "123456","男", "940166841@qq.com",  0));
+        userRepository.save(new User("lizhihao2", "123456","男", "940166841@qq.com",  0, 0));
 
 //		Assert.assertEquals(3, userRepository.findAll().size());
 //		Assert.assertEquals("bb", userRepository.findByUserNameOrEmail("bb", "bb@126.com").getNickName());

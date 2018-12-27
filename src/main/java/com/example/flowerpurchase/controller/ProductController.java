@@ -55,4 +55,29 @@ public class ProductController {
         result.put("data", data);
         return result;
     }
+
+    @RequestMapping("/api/product")
+    private JSONObject fetchAll() {
+        JSONObject result = new JSONObject();
+        int code = 1;
+        String msg = "获取成功";
+        List<Product> list = productRepository.findAll();
+        JSONArray data = JSONArray.parseArray(JSON.toJSONString(list));
+        result.put("code", code);
+        result.put("msg", msg);
+        result.put("data", data);
+        return result;
+    }
+
+    @RequestMapping("/api/product/id/{id}")
+    private JSONObject fetchById(@PathVariable long id) {
+        JSONObject result = new JSONObject();
+        int code = 1;
+        String msg = "获取成功";
+        Product product = productRepository.findById(id).get();
+        result.put("code", code);
+        result.put("msg", msg);
+        result.put("data", product);
+        return result;
+    }
 }

@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class UserController {
             return result;
         }
         Random rand = new Random();
-        User user = new User(reqObj.get("username").toString(), reqObj.get("password").toString(), reqObj.get("sex").toString(), reqObj.get("email").toString(), rand.nextInt(10));
+        User user = new User(reqObj.get("username").toString(), reqObj.get("password").toString(), reqObj.get("sex").toString(), reqObj.get("email").toString(), rand.nextInt(10), 0);
         userRepository.save(user);
         result.put("code", 1);
         result.put("msg", msg);
@@ -48,12 +49,42 @@ public class UserController {
             if (!user.getPassword().equals(reqObj.get("password").toString())) {
                 msg = "密码不正确，请重新输入";
             } else {
-                Cookie cookie = new Cookie("username", String.valueOf(user.getId()));
-                cookie.setPath("/");
-                cookie.setMaxAge(3600);
-                response.addCookie(cookie);
+                Cookie cookie1 = new Cookie("uid", String.valueOf(user.getId()));
+                cookie1.setPath("/");
+                cookie1.setMaxAge(3600);
+                response.addCookie(cookie1);
+                Cookie cookie2 = new Cookie("username", user.getUsername());
+                cookie2.setPath("/");
+                cookie2.setMaxAge(3600);
+                response.addCookie(cookie2);
+                Cookie cookie3 = new Cookie("avatar", String.valueOf(user.getAvatar()));
+                cookie3.setPath("/");
+                cookie3.setMaxAge(3600);
+                response.addCookie(cookie3);
             }
         }
+        result.put("code", code);
+        result.put("msg", msg);
+        return result;
+    }
+
+    @RequestMapping("api/user/logout")
+    private JSONObject logout(HttpServletResponse response) {
+        Cookie cookie1 = new Cookie("uid", null);
+        cookie1.setPath("/");
+        cookie1.setMaxAge(0);
+        response.addCookie(cookie1);
+        Cookie cookie2 = new Cookie("username", null);
+        cookie2.setPath("/");
+        cookie2.setMaxAge(0);
+        response.addCookie(cookie2);
+        Cookie cookie3 = new Cookie("avatar", null);
+        cookie3.setPath("/");
+        cookie3.setMaxAge(0);
+        response.addCookie(cookie3);
+        JSONObject result = new JSONObject();
+        String msg = "退出成功";
+        int code = 1;
         result.put("code", code);
         result.put("msg", msg);
         return result;

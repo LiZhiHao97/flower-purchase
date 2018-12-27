@@ -19,12 +19,16 @@ public class User {
     @Column(nullable = false)
     private int avatar;
 
-    public User(String username, String password, String sex, String email, int avatar) {
+    @Column(nullable = false)
+    private int role;
+
+    public User(String username, String password, String sex, String email, int avatar, int role) {
         this.username = username;
         this.password = password;
         this.sex = sex;
         this.email = email;
         this.avatar = avatar;
+        this.role = role;
     }
 
     public User() {
@@ -77,5 +81,13 @@ public class User {
 
     public void setAvatar(int avatar) {
         this.avatar = avatar;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
