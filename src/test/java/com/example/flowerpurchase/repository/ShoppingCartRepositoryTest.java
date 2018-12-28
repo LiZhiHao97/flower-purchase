@@ -20,7 +20,7 @@ public class ShoppingCartRepositoryTest {
 
     @Test
     public void testSave() {
-        shoppingCartRepository.save(new ShoppingCart(1, 2, 10, 0, "222"));
+        shoppingCartRepository.save(new ShoppingCart(1, 2, "水仙花", 10, 10, 0, "222"));
     }
 
     @Test
@@ -41,5 +41,11 @@ public class ShoppingCartRepositoryTest {
         ShoppingCart shoppingCart = shoppingCartRepository.findById(2l).get();
         shoppingCart.setQuantity(shoppingCart.getQuantity() + 1);
         shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Test
+    public void testFindByUidAndPid() {
+        ShoppingCart shoppingCart = shoppingCartRepository.findAllByUidAndPid(2l, 8l);
+        System.out.println(shoppingCart);
     }
 }

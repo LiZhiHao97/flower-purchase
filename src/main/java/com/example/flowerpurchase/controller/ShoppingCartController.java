@@ -23,12 +23,20 @@ public class ShoppingCartController {
         JSONObject result = new JSONObject();
         String msg = "购物车添加成功";
         int code = 1;
-        Date day=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        ShoppingCart shoppingCart = new ShoppingCart(Integer.valueOf(reqObj.get("uid").toString()), Integer.valueOf(reqObj.get("pid").toString()), 1, Integer.valueOf(reqObj.get("checked").toString()), df.format(day));
-        shoppingCartRepository.save(shoppingCart);
-        result.put("code", code);
-        result.put("msg", msg);
+        ShoppingCart shoppingCartCheck = shoppingCartRepository.findAllByUidAndPid(Integer.valueOf(reqObj.get("uid").toString()), Integer.valueOf(reqObj.get("pid").toString()));
+        if (shoppingCartCheck == null) {
+            Date day=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            ShoppingCart shoppingCart = new ShoppingCart(Integer.valueOf(reqObj.get("uid").toString()), Integer.valueOf(reqObj.get("pid").toString()), reqObj.get("pname").toString(), Integer.valueOf(reqObj.get("price").toString()), Integer.valueOf(reqObj.get("quantity").toString()), Integer.valueOf(reqObj.get("checked").toString()), df.format(day));
+            shoppingCartRepository.save(shoppingCart);
+            result.put("code", code);
+            result.put("msg", msg);
+        } else {
+            code = 0;
+            msg = "商品已存在";
+            result.put("code", code);
+            result.put("msg", msg);
+        }
         return result;
     }
 

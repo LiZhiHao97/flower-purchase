@@ -17,7 +17,7 @@ public class AddressRepositoryTest {
 
     @Test
     public void testSave() {
-        addressRepository.save(new Address(1, "李祉昊", "13868224404", "浙江省", "舟山市", "普陀区", "沈家门", "asdasd"));
+        addressRepository.save(new Address(1, "狗篮子", "13868224404", "浙江省", "舟山市", "普陀区", "沈家门", "asdasd"));
     }
 
     @Test

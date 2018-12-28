@@ -12,6 +12,10 @@ public class ShoppingCart {
     private long uid;
     @Column(nullable = false)
     private long pid;
+    @Column(nullable =  false)
+    private String pname;
+    @Column(nullable =  false)
+    private int price;
     @Column(nullable = false)
     private int quantity;
     @Column(nullable = false)
@@ -19,9 +23,11 @@ public class ShoppingCart {
     @Column(nullable = false)
     private String create_time;
 
-    public ShoppingCart(long uid, long pid, int quantity, int checked, String create_time) {
+    public ShoppingCart(long uid, long pid, String pname, int price, int quantity, int checked, String create_time) {
         this.uid = uid;
         this.pid = pid;
+        this.pname = pname;
+        this.price = price;
         this.quantity = quantity;
         this.checked = checked;
         this.create_time = create_time;
@@ -51,6 +57,22 @@ public class ShoppingCart {
 
     public void setPid(long pid) {
         this.pid = pid;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getQuantity() {

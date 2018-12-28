@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
     List<ShoppingCart> findAllByUid(long uid);
+    ShoppingCart findAllByUidAndPid (long uid, long pid);
 }
