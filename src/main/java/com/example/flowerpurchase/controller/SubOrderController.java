@@ -1,12 +1,12 @@
 package com.example.flowerpurchase.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.flowerpurchase.model.SubOrder;
 import com.example.flowerpurchase.repository.SubOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,12 +16,29 @@ public class SubOrderController {
     private SubOrderRepository subOrderRepository;
 
     @PostMapping("/api/sub-order/create")
-    private Object create(@RequestBody JSONObject reqObj) {
+    private JSONObject create(@RequestBody List<JSONObject> data) {
         JSONObject result = new JSONObject();
         int code = 1;
         String msg = "创建成功";
-        Object data = reqObj.get("data");
-        
-        return data;
+        for(JSONObject item: data) {
+            SubOrder subOrder = new SubOrder(Integer.valueOf(item.get("oid").toString()), Integer.valueOf(item.get("pid").toString()), item.get("pname").toString(), Integer.valueOf(item.get("price").toString()), Integer.valueOf(item.get("quantity").toString()));
+            subOrderRepository.save(subOrder);
+        }
+        result.put("code", code);
+        result.put("msg", msg);
+        return result;
+    }
+
+    @RequestMapping("/api/sub-order/{oid}")
+    private JSONObject findAllByOid(@PathVariable long oid) {
+        JSONObject result = new JSONObject();
+        int code = 1;
+        String msg = "获取成功";
+        List<SubOrder> list = subOrderRepository.findAllByOid(oid);
+        JSONArray data = JSONArray.parseArray(JSON.toJSONString(list));
+        result.put("code", code);
+        result.put("mgs", msg);
+        result.put("data", data);
+        return result;
     }
 }
