@@ -29,6 +29,7 @@ public class OrderTableController {
         orderTableRepository.save(orderTable);
         result.put("code", code);
         result.put("msg", msg);
+        result.put("oid", orderTable.getId());
         return result;
     }
 

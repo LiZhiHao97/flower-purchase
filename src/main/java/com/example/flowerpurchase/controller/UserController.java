@@ -50,15 +50,15 @@ public class UserController {
             } else {
                 Cookie cookie1 = new Cookie("uid", String.valueOf(user.getId()));
                 cookie1.setPath("/");
-                cookie1.setMaxAge(3600);
+                cookie1.setMaxAge(86400);
                 response.addCookie(cookie1);
                 Cookie cookie2 = new Cookie("username", user.getUsername());
                 cookie2.setPath("/");
-                cookie2.setMaxAge(3600);
+                cookie2.setMaxAge(86400);
                 response.addCookie(cookie2);
                 Cookie cookie3 = new Cookie("avatar", String.valueOf(user.getAvatar()));
                 cookie3.setPath("/");
-                cookie3.setMaxAge(3600);
+                cookie3.setMaxAge(86400);
                 response.addCookie(cookie3);
             }
         }
